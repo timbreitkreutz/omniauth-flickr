@@ -43,6 +43,8 @@ module OmniAuth
         # This is a public API and does not need signing or authentication
         url = "/services/rest/?api_key=#{options.consumer_key}&format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=#{uid}"
         @raw_info ||= Net::HTTP.get(options.client_options[:site].gsub(/.*:\/\//, ""), url)
+      rescue ::Errno::ETIMEDOUT
+        raise ::Timeout::Error
       end
       
       def user_info
@@ -52,8 +54,6 @@ module OmniAuth
           @user_info = info["person"] unless info.nil?
         end
         @user_info
-      rescue ::Errno::ETIMEDOUT
-        raise ::Timeout::Error
       end
     end
   end
