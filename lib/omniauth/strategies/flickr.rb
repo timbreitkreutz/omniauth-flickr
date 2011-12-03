@@ -27,6 +27,7 @@ module OmniAuth
           :iconfarm => user_info["iconfarm"],
           :path_alias => user_info["path_alias"],
           :photosurl => user_info["photosurl"],
+          :profileurl => user_info["profileurl"],
           :mbox_sha1sum => user_info["mbox_sha1sum"],
           :location => user_info["location"],
           :image => "http://farm#{user_info["iconfarm"]}.static.flickr.com/#{user_info["iconserver"]}/buddyicons/#{uid}.jpg"
