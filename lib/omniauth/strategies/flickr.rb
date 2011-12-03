@@ -19,20 +19,37 @@ module OmniAuth
       }
       
       info do 
-        user_info
+        {
+          :username => access_token.params['username'],
+          :fullname => access_token.params['fullname'],
+          :ispro => user_info["ispro"],
+          :iconserver => user_info["iconserver"],
+          :iconfarm => user_info["iconfarm"],
+          :path_alias => user_info["path_alias"],
+          :photosurl => user_info["photosurl"],
+          :mbox_sha1sum => user_info["mbox_sha1sum"],
+          :location => user_info["location"],
+          :image => "http://farm#{user_info["iconfarm"]}.static.flickr.com/#{user_info["iconserver"]}/buddyicons/#{uid}.jpg"
+        }
       end
       
       extra do
-        {}
+ 	{
+          :raw_info => raw_info
+	}
+      end
+
+      def raw_info
+        # This is a public API and does not need signing or authentication
+        url = "/services/rest/?api_key=#{options.consumer_key}&format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=#{uid}"
+        @raw_info ||= Net::HTTP.get(options.client_options[:site].gsub(/.*:\/\//, ""), url)
       end
       
       def user_info
-        if @user_info.blank?
+        unless @user_info
           @user_info = {}
-          # This is a public API and does not need signing or authentication
-          url = "/services/rest/?api_key=#{options.consumer_key}&format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=#{uid}"
-          response = Net::HTTP.get(options.client_options[:site].gsub(/.*:\/\//, ""), url)
-          @user_info ||= MultiJson.decode(response.body) if response
+          info = MultiJson.decode(raw_info)
+          @user_info = info["person"] unless info.nil?
         end
         @user_info
       rescue ::Errno::ETIMEDOUT
