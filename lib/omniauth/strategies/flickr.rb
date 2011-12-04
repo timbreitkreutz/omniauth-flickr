@@ -20,14 +20,16 @@ module OmniAuth
       
       info do 
         {
-          :username => access_token.params['username'],
-          :fullname => access_token.params['fullname'],
+          :name => access_token.params['username'],
+          :nickname => access_token.params['fullname'],
           :ispro => user_info["ispro"],
           :iconserver => user_info["iconserver"],
           :iconfarm => user_info["iconfarm"],
           :path_alias => user_info["path_alias"],
-          :photosurl => user_info["photosurl"],
-          :profileurl => user_info["profileurl"],
+          :urls => {
+            "Photos" => user_info["photosurl"],
+            "Profile" => user_info["profileurl"],
+          },
           :mbox_sha1sum => user_info["mbox_sha1sum"],
           :location => user_info["location"],
           :image => "http://farm#{user_info["iconfarm"]}.static.flickr.com/#{user_info["iconserver"]}/buddyicons/#{uid}.jpg"
