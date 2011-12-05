@@ -1,5 +1,15 @@
 An Omniauth 1.0 Strategy for Flickr
 
+For more information see the following:
+
+ * https://github.com/intridea/omniauth/wiki/List-of-Strategies
+
+Release notes:
+
+ * Version 0.0.7
+ 
+   - Documentation and comment change only
+
  * Version 0.0.6 
 
    - Comply more closely to published Auth Hash Schema
