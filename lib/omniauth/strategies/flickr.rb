@@ -40,31 +40,25 @@ module OmniAuth
       end
       
       extra do
- 	{
+       {
           :raw_info => raw_info
-	}
+       }
       end
 
       # Return info gathered from the flickr.people.getInfo API call 
-      # (not authenticated) in its raw JSON form
-
+     
       def raw_info
         # This is a public API and does not need signing or authentication
-        url = "/services/rest/?api_key=#{options.consumer_key}&format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=#{uid}"
-        @raw_info ||= Net::HTTP.get(options.client_options[:site].gsub(/.*:\/\//, ""), url)
+        request = "/services/rest/?format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=#{uid}"
+        @raw_info ||= MultiJson.decode(access_token.get(request).body)
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
       end
 
-      # Parse the "Person" portion of the raw_info JSON into a hash
+      # Provide the "Person" portion of the raw_info
       
       def user_info
-        unless @user_info
-          @user_info = {}
-          info = MultiJson.decode(raw_info)
-          @user_info = info["person"] unless info.nil?
-        end
-        @user_info
+        @user_info ||= raw_info.nil? ? {} : raw_info["person"]
       end
     end
   end
