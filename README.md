@@ -6,6 +6,11 @@ For more information see the following:
 
 Release notes:
 
+
+ * Version 0.0.9
+
+  - Allow :scope => 'read' in omniauth setup options
+  
  * Version 0.0.8
  
    - Use authenticated version of flickr.people.getInfo (contrary to flickr docs, api_key must not be specified on url)
