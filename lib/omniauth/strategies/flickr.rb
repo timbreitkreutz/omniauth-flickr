@@ -40,9 +40,9 @@ module OmniAuth
       end
       
       extra do
-       {
+        {
           :raw_info => raw_info
-       }
+        }
       end
 
       # Return info gathered from the flickr.people.getInfo API call 
@@ -59,6 +59,11 @@ module OmniAuth
       
       def user_info
         @user_info ||= raw_info.nil? ? {} : raw_info["person"]
+      end
+      
+      def request_phase
+        options[:authorize_params] = {:perms => options[:scope]} if options[:scope]
+        super
       end
     end
   end
