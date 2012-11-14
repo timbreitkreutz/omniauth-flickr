@@ -6,6 +6,9 @@ For more information see the following:
 
 Release notes:
 
+ * Version 0.0.10
+ 
+  - Fix bugs for users without avatars (thanks viseztrance)
 
  * Version 0.0.9
 
