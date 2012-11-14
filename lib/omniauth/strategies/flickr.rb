@@ -7,9 +7,9 @@ module OmniAuth
     # An omniauth 1.0 strategy for Flickr authentication
     # Based on http://www.flickr.com/services/api/auth.oauth.html
     class Flickr < OmniAuth::Strategies::OAuth
-      
+
       option :name, 'flickr'
-      
+
       option :client_options, {
         :access_token_path => "/services/oauth/access_token",
         :authorize_path => "/services/oauth/authorize",
@@ -17,11 +17,11 @@ module OmniAuth
         :site => "http://www.flickr.com"
       }
 
-      uid { 
+      uid {
         access_token.params['user_nsid']
       }
-      
-      info do 
+
+      info do
         {
           :name => access_token.params['username'],
           :nickname => access_token.params['fullname'],
@@ -35,18 +35,18 @@ module OmniAuth
           },
           :mbox_sha1sum => user_info["mbox_sha1sum"],
           :location => user_info["location"],
-          :image => "http://farm#{user_info["iconfarm"]}.static.flickr.com/#{user_info["iconserver"]}/buddyicons/#{uid}.jpg"
+          :image => image_info
         }
       end
-      
+
       extra do
         {
           :raw_info => raw_info
         }
       end
 
-      # Return info gathered from the flickr.people.getInfo API call 
-     
+      # Return info gathered from the flickr.people.getInfo API call
+
       def raw_info
         # This is a public API and does not need signing or authentication
         request = "/services/rest/?format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=#{uid}"
@@ -56,11 +56,17 @@ module OmniAuth
       end
 
       # Provide the "Person" portion of the raw_info
-      
+
       def user_info
         @user_info ||= raw_info.nil? ? {} : raw_info["person"]
       end
-      
+
+      def image_info
+        if user_info["iconfarm"] > 0
+          "http://farm#{user_info["iconfarm"]}.static.flickr.com/#{user_info["iconserver"]}/buddyicons/#{uid}.jpg"
+        end
+      end
+
       def request_phase
         options[:authorize_params] = {:perms => options[:scope]} if options[:scope]
         super
