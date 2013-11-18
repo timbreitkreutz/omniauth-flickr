@@ -5,7 +5,7 @@ For more information see the following:
  * https://github.com/intridea/omniauth/wiki/List-of-Strategies
 
 Release notes:
- * Version 0.0.12
+ * Version 0.0.13
 
   - better default avatar, thanks to Brainimus
 
