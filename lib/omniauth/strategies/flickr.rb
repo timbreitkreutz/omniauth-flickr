@@ -14,7 +14,7 @@ module OmniAuth
         :access_token_path => "/services/oauth/access_token",
         :authorize_path => "/services/oauth/authorize",
         :request_token_path => "/services/oauth/request_token",
-        :site => "http://www.flickr.com"
+        :site => "https://www.flickr.com"
       }
 
       uid {
