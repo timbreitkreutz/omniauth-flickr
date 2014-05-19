@@ -5,6 +5,11 @@ For more information see the following:
  * https://github.com/intridea/omniauth/wiki/List-of-Strategies
 
 Release notes:
+
+ * Version 0.0.14
+
+  - Use new HTTPS endpoint for API - thanks @rubyonrails3
+
  * Version 0.0.13
 
   - better default avatar, thanks to Brainimus
