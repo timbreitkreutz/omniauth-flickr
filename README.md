@@ -6,7 +6,7 @@ For more information see the following:
 
 Release notes:
 
- * Version 0.0.14
+ * Version 0.0.15
 
   - Use HTTPS for default icon (see://www.flickr.com/services/api/misc.buddyicons.html) 
 
