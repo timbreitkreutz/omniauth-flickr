@@ -65,7 +65,7 @@ module OmniAuth
         if user_info["iconfarm"] && user_info["iconfarm"] > 0
           "http://farm#{user_info["iconfarm"]}.static.flickr.com/#{user_info["iconserver"]}/buddyicons/#{uid}.jpg"
         else
-          "http://www.flickr.com/images/buddyicon.gif"
+          "https://www.flickr.com/images/buddyicon.gif"
         end
       end
 

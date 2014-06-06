@@ -8,6 +8,10 @@ Release notes:
 
  * Version 0.0.14
 
+  - Use HTTPS for default icon (see://www.flickr.com/services/api/misc.buddyicons.html) 
+
+ * Version 0.0.14
+
   - Use new HTTPS endpoint for API - thanks @rubyonrails3
 
  * Version 0.0.13
