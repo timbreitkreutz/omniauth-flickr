@@ -1,10 +1,20 @@
-An Omniauth 1.0 Strategy for Flickr
+# An Omniauth 1.0 Strategy for Flickr
 
-For more information see the following:
+## Basic setup example
+
+```RUBY
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :flickr, ENV['FLICKR_KEY'], ENV['FLICKR_SECRET'], scope: 'read'
+  end
+```
+A scope must be set, which translate to the `perms` parameter in the request url. Valid perms (scopes) are `read`, `write` and `delete`.
+
+## For more information see the following:
 
  * https://github.com/intridea/omniauth/wiki/List-of-Strategies
-
-Release notes:
+ * https://www.flickr.com/services/api/auth.howto.web.html
+ 
+## Release notes:
 
  * Version 0.0.15
 
