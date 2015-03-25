@@ -18,8 +18,8 @@ Example [AuthHash](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema) f
 provider: flickr
 uid: 62839091@N05
 info: !ruby/hash:OmniAuth::AuthHash::InfoHash
-  name: example_user
-  nickname: Example User
+  name: Example User
+  nickname: example_user
   ispro: 0
   iconserver: '8061'
   iconfarm: 9
