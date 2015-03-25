@@ -47,6 +47,10 @@ credentials: !ruby/hash:OmniAuth::AuthHash
  
 ## Release notes:
 
+ * Version 0.0.17
+
+  - better examples and documentation, fix reversed name and nickname (thanks @maxcal)
+
  * Version 0.0.15
 
   - Use HTTPS for default icon (see://www.flickr.com/services/api/misc.buddyicons.html) 
