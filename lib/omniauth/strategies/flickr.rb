@@ -23,8 +23,8 @@ module OmniAuth
 
       info do
         {
-          :name => access_token.params['username'],
-          :nickname => access_token.params['fullname'],
+          :name => access_token.params['fullname'],
+          :nickname => access_token.params['username'],
           :ispro => user_info["ispro"],
           :iconserver => user_info["iconserver"],
           :iconfarm => user_info["iconfarm"],
