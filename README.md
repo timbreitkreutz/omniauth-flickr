@@ -1,4 +1,5 @@
-# An Omniauth 1.0 Strategy for Flickr
+# omniauth-flickr
+## An Omniauth 1.0 Strategy for Flickr
 
 ## Basic setup example
 
@@ -7,7 +8,37 @@
     provider :flickr, ENV['FLICKR_KEY'], ENV['FLICKR_SECRET'], scope: 'read'
   end
 ```
-A scope must be set, which translate to the `perms` parameter in the request url. Valid perms (scopes) are `read`, `write` and `delete`.
+A scope must be set, which translate to the `perms` parameter in the request url. 
+Valid perms (scopes) are `read`, `write` and `delete`.
+Info about the authenticated user is fetched from [flickr.people.getInfo](https://www.flickr.com/services/api/flickr.people.getInfo.html).
+
+Example [AuthHash](https://github.com/intridea/omniauth/wiki/Auth-Hash-Schema) from a successful authentication:
+
+```YML
+provider: flickr
+uid: 62839091@N05
+info: !ruby/hash:OmniAuth::AuthHash::InfoHash
+  name: example_user
+  nickname: Example User
+  ispro: 0
+  iconserver: '8061'
+  iconfarm: 9
+  path_alias: 
+  urls: !ruby/hash:OmniAuth::AuthHash
+    Photos: !ruby/hash:OmniAuth::AuthHash
+      _content: https://www.flickr.com/photos/62839091@N05/
+    Profile: !ruby/hash:OmniAuth::AuthHash
+      _content: https://www.flickr.com/people/62839091@N05/
+  mbox_sha1sum: !ruby/hash:OmniAuth::AuthHash
+    _content: f9aa1a7919dea99ba86c773f58381aebc91e333d
+  location: !ruby/hash:OmniAuth::AuthHash
+    _content: "Åre, Sweden"
+  image: http://farm9.static.flickr.com/8061/buddyicons/62839091@N05.jpg
+credentials: !ruby/hash:OmniAuth::AuthHash
+  token: 72157650421100317-c02692b6059aa1f3
+  secret: 75174bc4da58893a
+# ...
+```
 
 ## For more information see the following:
 
