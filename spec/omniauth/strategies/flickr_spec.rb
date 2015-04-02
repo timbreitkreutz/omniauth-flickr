@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'omniauth/strategies/flickr'
-require 'json'
+require "addressable/uri"
 
 RSpec.describe OmniAuth::Strategies::Flickr, type: :strategy do
 
@@ -60,9 +60,9 @@ RSpec.describe OmniAuth::Strategies::Flickr, type: :strategy do
 
     before do
       stub_request(:post, 'https://www.flickr.com/services/oauth/access_token').
-          to_return(:body => "oauth_token=yourtoken&oauth_token_secret=yoursecret")
+          to_return(:body => "oauth_token=yourtoken&oauth_token_secret=yoursecret&username=j.bloggs&fullname=John Bloggs&user_nsid=ABC123")
 
-      stub_request(:get, 'https://www.flickr.com/services/rest/?format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=')
+      stub_request(:get, 'https://www.flickr.com/services/rest/?format=json&method=flickr.people.getInfo&nojsoncallback=1&user_id=ABC123')
         .to_return(:body => get_info)
 
       get '/auth/flickr/callback', {:oauth_verifier => 'dudeman'}, session
@@ -77,16 +77,26 @@ RSpec.describe OmniAuth::Strategies::Flickr, type: :strategy do
       expect(auth_response['extra']['access_token']).to be_kind_of(OAuth::AccessToken)
     end
 
-    it 'has the correct nickname' do
-      pending("Do not current know how to properly setup mock request to get expected result") do
-        expect(auth_response['info']['nickname']).to eq "j.bloggs"
-      end
+    it "has the correct UID" do
+      expect(auth_response.uid).to eq "ABC123"
     end
 
-    it 'has the correct name' do
-      pending("Do not current know how to properly setup mock request to get expected result") do
-        expect(auth_response['info']['name']).to eq "John Bloggs"
-      end
+    describe "auth_response.info" do
+      subject { auth_response['info'] }
+
+      its(:nickname) { should eq "j.bloggs" }
+      its(:name) { should eq "John Bloggs" }
+      its(:image) { should eq 'http://farm9.static.flickr.com/8061/buddyicons/ABC123.jpg' }
+      its(:ispro) { should eq 0 }
+      its(:iconserver) { should eq "8061" }
+      its(:iconfarm) { should eq 9 }
+      its(:path_alias) { should eq "test string" }
+      its(:urls) { should eq({
+           "Photos" => "https://www.flickr.com/photos/ABC123/",
+           "Profile" => "https://www.flickr.com/people/ABC123/",
+      })}
+      its(:mbox_sha1sum) { should eq "f9aa1a7919dea99ba86c773f58381aebc91e333d"}
+      its(:location) { should eq "Gotham, USA" }
     end
   end
 end

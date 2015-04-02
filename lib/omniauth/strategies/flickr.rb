@@ -22,22 +22,26 @@ module OmniAuth
       }
 
       info do
+
+        user_info_unwrapped = unwrap_hash_content(user_info.clone)
         {
           :name => access_token.params['fullname'],
           :nickname => access_token.params['username'],
-          :ispro => user_info["ispro"],
-          :iconserver => user_info["iconserver"],
-          :iconfarm => user_info["iconfarm"],
-          :path_alias => user_info["path_alias"],
+          :ispro => user_info_unwrapped["ispro"],
+          :iconserver => user_info_unwrapped["iconserver"],
+          :iconfarm => user_info_unwrapped["iconfarm"],
+          :path_alias => user_info_unwrapped["path_alias"],
           :urls => {
-            "Photos" => user_info["photosurl"],
-            "Profile" => user_info["profileurl"],
+            "Photos" => user_info_unwrapped["photosurl"],
+            "Profile" => user_info_unwrapped["profileurl"],
           },
-          :mbox_sha1sum => user_info["mbox_sha1sum"],
-          :location => user_info["location"],
+          :mbox_sha1sum => user_info_unwrapped["mbox_sha1sum"],
+          :location => user_info_unwrapped["location"],
           :image => image_info
         }
       end
+
+
 
       extra do
         {
@@ -72,6 +76,17 @@ module OmniAuth
       def request_phase
         options[:authorize_params] = {:perms => options[:scope]} if options[:scope]
         super
+      end
+
+      private
+      # Flickr has a really annoying habit of wrapping values in { "_content" : "something" }
+      # This loops through an auth hash and converts these values into simple key / val
+      def unwrap_hash_content(hash)
+        hash.each do  |key, val|
+          if val.respond_to? :has_key?
+            hash[key] = val['_content'] if val.has_key?('_content')
+          end
+        end
       end
     end
   end

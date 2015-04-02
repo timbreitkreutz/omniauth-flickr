@@ -6,7 +6,7 @@
         "can_buy_pro": 0,
         "iconserver": "8061",
         "iconfarm": 9,
-        "path_alias": "",
+        "path_alias": "test string",
         "has_stats": 0,
         "username":  "j.bloggs",
         "realname": { "_content": "John Bloggs" },

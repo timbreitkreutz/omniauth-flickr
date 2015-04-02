@@ -22,6 +22,7 @@ require 'rack/test'
 require 'webmock/rspec'
 require 'omniauth'
 require 'logger'
+require 'rspec/its'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
