@@ -1,0 +1,28 @@
+{
+    "person": {
+        "id": "ABC123",
+        "nsid": "ABC123",
+        "ispro": 0,
+        "can_buy_pro": 0,
+        "iconserver": "8061",
+        "iconfarm": 9,
+        "path_alias": "test string",
+        "has_stats": 0,
+        "username":  "j.bloggs",
+        "realname": { "_content": "John Bloggs" },
+        "mbox_sha1sum": { "_content": "f9aa1a7919dea99ba86c773f58381aebc91e333d" },
+        "location": { "_content": "Gotham, USA" },
+        "timezone": { "label": "Pacific Time (US & Canada); Tijuana", "offset": "-08:00" },
+        "description": { "_content": "Amateur photographer from sweden.\n\nMost of my images are available with a creative commons licence for non-commercial usage. But i do appreciate if you contact me prior to publishing." },
+        "photosurl": { "_content": "https:\/\/www.flickr.com\/photos\/ABC123\/" },
+        "profileurl": { "_content": "https:\/\/www.flickr.com\/people\/ABC123\/" },
+        "mobileurl": { "_content": "https:\/\/m.flickr.com\/photostream.gne?id=ABC123" },
+        "photos": {
+            "firstdatetaken": { "_content": "2011-04-25 14:20:23" },
+            "firstdate": { "_content": "1305397528" },
+            "count": { "_content": "191" },
+            "views": { "_content": "156" }
+        }
+    },
+    "stat": "ok"
+}
