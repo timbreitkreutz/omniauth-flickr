@@ -47,6 +47,11 @@ credentials: !ruby/hash:OmniAuth::AuthHash
  
 ## Release notes:
 
+ * Version 0.0.19
+
+  - Add licence to gemspec
+  - Add some defensive code for jruby (see https://github.com/timbreitkreutz/omniauth-flickr/issues/4)
+
  * Version 0.0.18
 
   - add test cases from Maxcal

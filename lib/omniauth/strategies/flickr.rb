@@ -75,6 +75,7 @@ module OmniAuth
 
       def request_phase
         options[:authorize_params] = {:perms => options[:scope]} if options[:scope]
+        session['oauth'] ||= {} # https://github.com/timbreitkreutz/omniauth-flickr/issues/4
         super
       end
 
