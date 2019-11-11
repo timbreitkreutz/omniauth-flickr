@@ -47,6 +47,10 @@ credentials: !ruby/hash:OmniAuth::AuthHash
  
 ## Release notes:
 
+ * Version 0.0.20
+
+  - update multi-json gem (thanks @johan-smits)
+
  * Version 0.0.19
 
   - Add licence to gemspec
